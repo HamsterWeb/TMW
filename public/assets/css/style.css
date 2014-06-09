@@ -1,0 +1,108 @@
+/*@include font-face("ArimoRegular", 
+		 font-files("../fonts/arimo-regular-webfont.woff", woff,
+		 			"../fonts/arimo-regular-webfont.ttf", ttf),
+		 			"../fonts/arimo-regular-webfont.eot", normal, normal);*/
+@import "compass/css3/border-radius";
+/*$green: #00FFB3;*/
+/*$corall: #ff5D51;*/
+@font-face {
+  font-family: "ArimoRegular";
+  src: url("../fonts/arimo-regular-webfont.eot");
+  src: url("../fonts/arimo-regular-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/arimo-regular-webfont.woff") format("woff"), url("../fonts/arimo-regular-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  background-color: #fff;
+  color: #3d8299;
+}
+body h1, body h2, body h3, body h4, body h5, body h5, body p {
+  font-family: "ArimoRegular";
+}
+body .blue-light-bkg {
+  background-color: #149ecc;
+}
+body .blue-dark-bkg {
+  /*opacity:0.9;*/
+  background-color: #3d8299;
+  color: #fff;
+}
+body .green-bkg {
+  background-color: #4eeb9f;
+}
+body .white-bkg {
+  background-color: #fff;
+  color: #000;
+}
+body #header-wrap {
+  padding: 0;
+}
+body #header-wrap .logo-wrap {
+  padding: 1em;
+  display: inline-block;
+}
+body #header-wrap .logo-wrap img, body #header-wrap .logo-wrap figure {
+  max-height: 60px;
+}
+body #header-wrap .navbar {
+  margin-bottom: 0;
+  min-height: 60px;
+}
+body #header-wrap .navbar ul {
+  margin: 18px 0;
+  padding: 0;
+  float: right;
+}
+body #header-wrap .navbar ul li {
+  list-style: none;
+  float: left;
+}
+body #header-wrap .navbar ul li a {
+  display: block;
+  border-bottom: 3px solid #ff6d4f;
+  line-height: 1.5em;
+  margin-right: 0.2em;
+  padding: 0.5em 0.7em;
+  color: #3d8299;
+}
+body #header-wrap .navbar ul li a:hover, body #header-wrap .navbar ul li a:active, body #header-wrap .navbar ul li a.current {
+  border-bottom: 3px solid #4eeb9f;
+  text-decoration: none;
+}
+body .heading {
+  text-align: center;
+  min-height: 50px;
+  color: #cc3c61;
+  font-weight: 600;
+}
+body .form-wrap {
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  border: 1px solid #e8e8e8;
+  padding: 0.5em 1.2em;
+}
+body .tabs-wrap, body .table-wrap {
+  margin-top: 30px;
+  padding: 0.5em 1.3em;
+}
+body .table-wrap td:nth-child(1) {
+  color: #cc3c61;
+}
+body #map-wrapper {
+  height: 500px;
+}
+body .text-wrap h4, body .text-wrap h5 {
+  color: #3d8299;
+}
+body .text-wrap section {
+  margin-top: 1em;
+}
+body .text-wrap section h4, body .text-wrap section h5 {
+  margin-bottom: 0.2em;
+}
+body table {
+  margin-top: 1em;
+}
+body table thead {
+  color: #cc3c61;
+}

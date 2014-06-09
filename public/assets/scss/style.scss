@@ -1,0 +1,162 @@
+@import "compass/css3/border-radius";
+/*@include font-face("ArimoRegular", 
+		 font-files("../fonts/arimo-regular-webfont.woff", woff,
+		 			"../fonts/arimo-regular-webfont.ttf", ttf),
+		 			"../fonts/arimo-regular-webfont.eot", normal, normal);*/
+
+@font-face {
+	font-family: "ArimoRegular";
+	src: url("../fonts/arimo-regular-webfont.eot");
+	src: url("../fonts/arimo-regular-webfont.eot?#iefix") format('embedded-opentype'),
+		 url("../fonts/arimo-regular-webfont.woff") format("woff"),
+		 url("../fonts/arimo-regular-webfont.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+$blue_light: #149ECC;
+$blue_dark: #3D8299;
+/*$green: #00FFB3;*/
+$green: #4EEB9F;
+/*$corall: #ff5D51;*/
+$corall:#FF6D4F;
+$red: #CC3C61;
+$white: #fff;
+$black:#000;
+$grey_light:#F7F7F7;
+$grey-medium:#E8E8E8;
+$arimo-regular: "ArimoRegular";
+
+
+body {
+	background-color:$white;
+	color:$blue_dark;
+
+	h1, h2, h3, h4, h5, h5, p {
+		font-family: $arimo-regular;
+	}
+
+	.blue-light-bkg{
+		background-color:$blue_light;
+	}
+	.blue-dark-bkg {
+		background-color: $blue_dark;
+		/*opacity:0.9;*/
+		color:$white;
+	}
+
+	.green-bkg {
+		background-color: $green;
+	}
+
+	.white-bkg {
+		background-color: $white;
+		color:$black;
+	}
+
+
+	#header-wrap {
+		padding:0;
+
+		.logo-wrap {
+			padding:1em;
+			display: inline-block;
+
+			img,
+			figure {
+				max-height:60px;
+				
+			}
+		}
+
+		.navbar {
+			margin-bottom: 0;
+			min-height:60px;
+			
+				ul {
+					margin:18px 0;
+					padding:0;
+					float:right;
+
+					li {
+						list-style: none;
+						float:left;
+
+						a {
+							display:block;
+							border-bottom: 3px solid $corall;
+						    line-height: 1.5em;
+						    margin-right: 0.2em;
+						    padding: 0.5em 0.7em;
+						    color:$blue_dark;
+						}
+
+						a:hover,
+						a:active,
+						a.current {
+							border-bottom:3px solid $green;
+							text-decoration: none;
+						}
+					}
+				}
+			
+		}
+	}
+
+	.heading {
+		text-align: center;
+		min-height: 50px;
+		color:$red;
+		font-weight:600;
+	}
+
+	.welcome {
+		
+	}
+
+	.form-wrap {
+		background-color: $grey_light;
+		border-radius:3px;
+		border:1px solid $grey-medium;
+		padding:0.5em 1.2em;
+	}
+
+	.tabs-wrap,
+	.table-wrap {
+		margin-top:30px;
+		padding:0.5em 1.3em;
+	}
+
+	.table-wrap {
+		td:nth-child(1) {
+			color:$red;
+		}
+	}
+
+	#map-wrapper {
+		
+		height:500px;
+	}
+
+	.text-wrap {
+		h4, h5 {
+			color:$blue_dark;
+		}
+
+		section {
+			margin-top:1em;
+
+			h4, h5 {
+				margin-bottom: 0.2em;
+			}
+		}
+	}
+
+	table {
+		margin-top:1em;
+
+		thead {
+			color:$red;
+		}
+	}
+}
