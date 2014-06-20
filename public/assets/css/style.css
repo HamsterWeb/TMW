@@ -34,6 +34,9 @@ body .white-bkg {
   background-color: #fff;
   color: #000;
 }
+body .nobottommargin {
+  margin-bottom: 0 !important;
+}
 body #header-wrap {
   padding: 0;
 }
@@ -79,7 +82,46 @@ body .form-wrap {
   background-color: #f7f7f7;
   border-radius: 3px;
   border: 1px solid #e8e8e8;
-  padding: 0.5em 1.2em;
+  padding: 1.5em 1.2em;
+  margin: 1em 0;
+}
+body .form-wrap .select2-container {
+  min-width: 100%;
+}
+body .form-wrap .error-message {
+  color: #cc3c61;
+  left: 1em;
+  margin-top: -0.2em;
+  max-width: 80%;
+  position: absolute;
+  display: none;
+}
+body .form-wrap .error {
+  border: 1px solid #cc3c61 !important;
+}
+body .form-wrap input[type=range] {
+  width: 85%;
+  padding-top: 1em;
+  display: inline-block;
+}
+body .form-wrap output {
+  position: absolute;
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  color: #3d8299;
+  display: inline-block;
+  left: 0;
+  margin-left: 0;
+  font-size: 12px;
+  top: 12px;
+}
+body .form-wrap label.check-label {
+  color: #3d8299;
+  font-weight: normal;
+}
+body .form-wrap select.form-control {
+  height: 30px;
 }
 body .tabs-wrap, body .table-wrap {
   margin-top: 30px;
@@ -105,4 +147,26 @@ body table {
 }
 body table thead {
   color: #cc3c61;
+}
+body .edit-btn {
+  position: absolute;
+  top: 0;
+  right: 1.5em;
+}
+body .edited, body .editable {
+  border: 1px dashed #e8e8e8;
+  border-radius: 3px;
+  padding: 0.1em 0.3em;
+  display: block;
+  position: relative;
+}
+body .edited textarea, body .editable textarea {
+  position: absolute;
+  border: 1px solid #e8e8e8;
+  border-radius: 2px;
+  top: 0;
+  left: 0;
+}
+body .edited {
+  border: none;
 }

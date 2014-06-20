@@ -2,6 +2,14 @@
 
 /*
 |--------------------------------------------------------------------------
+| Custom Rules 
+|--------------------------------------------------------------------------
+*/
+
+
+
+/*
+|--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
 |
@@ -19,26 +27,28 @@
 	{
 		return View::make('hello');
 }));*/
+
 Route::model('spot', 'Spot');
 Route::model('rider', 'Rider');
 
+
 /* spots */
-Route::get('/', array(
-					'as' => 'index',
-					'uses' => 'SpotController@showIndex'
-					));
+Route::get('/', array('as' => 'index', 'uses' => 'SpotController@showIndex'));
 
-Route::get('spot/new', array(
-					'as' => 'newSpot',
-					'uses' => 'SpotController@newSpot'
-					));
+Route::get('spot/new', array( 'as' => 'newSpot', 'uses' => 'SpotController@newSpot'));
 
-Route::get('spot/add', array(
-					'as' => 'addSpot',
-					'uses' => 'SpotController@addSpot'
-			));
+Route::post('spot/add', array('before' => 'csrf', 'as' => 'addSpot', 'uses' => 'SpotController@addSpot' ));
 
-Route::get('spot/{spot}', 'SpotController@showSpot');
+Route::get('spot/{id}', 'SpotController@showSpot');
+
+Route::post('georegion/find', array('before' => 'csrf', 'as' => 'georegion', 'uses' => 'GeoController@getRegions' ));
+
+Route::post('spot/checkname', array('before' => 'csrf', 'uses' =>'SpotController@checkNameIfExists'));
+
+Route::post('spot/addlatlng', array('before' => 'csrf', 'uses' => 'SpotController@addLatLng'));
+
+Route::post('spot/{id}/edit', array('before' => 'csrf', 'uses' => 'SpotController@editSpot'));
+
 
 /* users */
 

@@ -9,6 +9,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<title>Windsurf|Kitesurf spot finder</title>
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}" />
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}" />
@@ -38,6 +39,7 @@
 
 	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="{{ asset('assets/js/main.js') }}"> </script>
 	<script src="{{ asset('assets/js/bootstrap.min.js') }}"> </script>
 	@yield('scripts')
 

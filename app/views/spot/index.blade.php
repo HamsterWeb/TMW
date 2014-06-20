@@ -37,20 +37,15 @@
 <!--Load the AJAX API-->
     <script type='text/javascript' src='https://www.google.com/jsapi'></script>
     <script type='text/javascript'>
+    //console.log({{ $spots }});
      google.load('visualization', '1', {'packages': ['geochart']});
      google.setOnLoadCallback(drawRegionsMap);
 
       function drawRegionsMap() {
-        var data = google.visualization.arrayToDataTable([
-          ['Spot', ''],
-          ['Essaouira', 3],
-          ['Tarifa', 4],
-          ['Cambucu', 7],
-          ['Melville-Franceville', 8],
-          ['Leucate', 8],
-          ['Jericoacoara', 9]
-        ]);
-
+        var data = google.visualization.arrayToDataTable(
+            {{ $spots }}
+        );
+        //console.log(data);
         var options = {
         	displayMode: 'text',
         	backgroundColor: {fill: "#fff", stroke: '#E8E8E8'} , 

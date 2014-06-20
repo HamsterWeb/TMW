@@ -13,3 +13,5 @@
 	</div>
 </body>
 </html>
+
+<?php var_dump($regions); ?>

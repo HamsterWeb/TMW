@@ -4,10 +4,15 @@ use GeoRegion;
 
 class GeoRegionRepository implements iGeoRegionRepository {
 
-	public function getList($limit = 0, $skip = 0) {
+	protected $georegion;
 
-		return GeoRegion::all()->toArray();
+	public function __construct(GeoRegion $gr) {
+		$this->georegion = $gr;
+	}
 
+	public function getRegion($id = 0){
+		if($id != 0)
+			return $this->georegion->getRegion($id);
 	}
 
 }

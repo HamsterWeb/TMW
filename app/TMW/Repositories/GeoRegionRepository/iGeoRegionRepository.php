@@ -1,8 +1,9 @@
 <?php 
 namespace TMW\Repositories\GeoRegionRepository;
+use GeoRegion;
 
 interface iGeoRegionRepository {
 
-	public function getList($limit = 0, $skip = 0);
+	public function getRegion($id = 0);
 
 }

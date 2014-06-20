@@ -17,7 +17,8 @@ ClassLoader::addDirectories(array(
 	app_path().'/controllers',
 	app_path().'/models',
 	app_path().'/database/seeds',
-	app_path().'/TMW'
+	app_path().'/TMW',
+	app_path().'/validators'
 
 ));
 
@@ -87,3 +88,9 @@ require app_path().'/filters.php';
 ---------------------------------------------------------------------------
 */
 require app_path().'/ioc.php';
+
+/* -------------------------------------------------------------------------
+| Require validation file
+----------------------------------------------------------------------------
+*/
+require app_path().'/validation.php';

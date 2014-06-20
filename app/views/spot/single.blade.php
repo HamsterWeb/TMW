@@ -5,7 +5,8 @@
 <div class="container-fluid">
       <div class="row">
       	<div class="cols-xs-12 heading">
-      		<h3> Preà </h3>
+      		<h3> {{ $spot->name }} </h3>
+                  <h5> {{ $georegion->name }},  {{ $geounit->name }} </h5>
       	</div>
       </div>
 
@@ -14,112 +15,93 @@
       		<div id="map">
       		</div>
       	</div>
-      	<div class="cols-xs-12 col-md-8 text-wrap">
+      	<div class="cols-xs-12 col-md-8 text-wrap" model="spot-{{ $spot->id }}">
+                  <aside class="edit-btn">
+                        <button type="button" class="btn btn-default btn-xs">
+                              <span class="glyphicon glyphicon-pencil"></span> Edit
+                        </button>
+                  </aside>
       		<section>
 	      		<h4>
 	      			Description
 	      		</h4>
-	      		<p> 
-	      			Lorem ipsum Ut commodo consectetur nisi voluptate sunt laborum cillum consectetur dolor fugiat magna ex eu ad elit dolor reprehenderit enim.
-	      		</p>
+	      		<p field="description">{{ $spot->description or 'Give some description' }} </p>
 	      	</section>
 	      	<section>
 	      		<h4> Environment </h4>
-	      		<p>
-	      			Water type: ocean 
-	      		</p>
-	      		<p> 
-	      			Lorem ipsum Dolor tempor in consequat sed Excepteur adipisicing Ut mollit in anim elit ea minim do amet.
-	      		</p>
+	      		<p field="environment">{{ $spot->environment or 'Describe the environment' }}</p>
 	      	</section>
 	      	<section>
-	      		<h4> Advantages </h4>
-	      		<p> 
-	      			Lorem ipsum Dolor tempor in consequat sed Excepteur adipisicing Ut mollit in anim elit ea minim do amet.
-	      		</p>
+	      		<h4> Good points </h4>
+	      		<p field="advantages">{{ $spot->advantages or 'Any good points?'}}</p>
 	      	</section>
 	      	<section>
-	      		<h4> Disadvantages </h4>
-	      		<p> 
-	      			Lorem ipsum Dolor tempor in consequat sed Excepteur adipisicing Ut mollit in anim elit ea minim do amet.
-	      		</p>
+	      		<h4> Bad points </h4>
+	      		<p field="disadvantages">{{ $spot->disadvantages or 'Any bad points?'}}</p>
 	      	</section>
       	</div>
       </div>
 
       <div class="row">
       	<div class="cols-xs-12">
-      		<div class="tabs-wrap">
-	      		<ul class="nav nav-tabs">
-	      			<li class="active"> 
-	      				<a href="#kite" data-toggle="tab"> Kitesurf </a>
-	      			</li>
-	      			<li> 
-	      				<a href="#wind" data-toggle="tab"> Windsurf </a>
-	      			</li>
-	      		</ul>
-
-	      		<div class="tab-content">
-	      			<div class="tab-pane active" id="kite">
-	      				<div class="table-responsive">
-		      				<table class="table table-bordered table-striped table-hover">
-		      					<thead>
-		      						<tr>
-		      							<td>
-		      								Tide
-		      							</td>
-		      							<td>
-		      								Waves
-		      							</td>
-		      							<td>
-		      								Difficulty
-		      							</td>
-		      							<td>
-		      								Windguru reliable
-		      							</td>
-		      							<td>
-		      								Best period
-		      							</td>
-		      							<td>
-		      								Accessibility
-		      							</td>
-		      							<td>
-		      								Global note
-		      							</td>
-		      						</tr>
-		      					</thead>
-		      					<tbody>
-		      						<tr>
-		      							<td>
-		      								Yes
-		      							</td>
-		      							<td>
-		      								Yes
-		      							</td>
-		      							<td>
-		      								7/10
-		      							</td>
-		      							<td>
-		      								Yes
-		      							</td>
-		      							<td>
-		      								September-January
-		      							</td>
-		      							<td>
-		      								5/10
-		      							</td>
-		      							<td>
-		      								8/10
-		      							</td>
-		      						</tr>
-		      					</tbody>
-		      				</table>
-		      			</div>
-	      			</div>
-	      			<div class="tab-pane" id="wind">
-	      			</div>
-	      		</div>
-	      	</div>
+			<div class="table-responsive table-wrap">
+				<table class="table table-bordered table-striped table-hover">
+					<thead>
+						<tr>
+                                          <td>
+                                          </td>
+                                          <td> 
+                                                Water type
+                                          </td>
+							<td>
+								Tide
+							</td>
+							<td>
+								Waves
+							</td>
+							<td>
+								Difficulty
+							</td>
+							<td>
+								Windguru reliable
+							</td>
+							<td>
+								Accessibility
+							</td>
+							<td>
+								Global note
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+                                          <td>
+                                          </td>
+                                          <td>
+                                                Ocean
+                                          </td>
+							<td>
+								Yes
+							</td>
+							<td>
+								Yes
+							</td>
+							<td>
+								7/10
+							</td>
+							<td>
+								Yes
+							</td>
+							<td>
+								5/10
+							</td>
+							<td>
+								8/10
+							</td>
+						</tr>
+					</tbody>
+				</table>
+		      </div>
       	</div>
       </div>
 
@@ -309,13 +291,13 @@
       function drawRegionsMap() {
         var data = google.visualization.arrayToDataTable([
           ['Spot'],
-          ['Preà']
+          ['{{ $spot->name }}']
         ]);
 
         var options = {
         	displayMode: 'text',
         	backgroundColor: {fill: "#fff", stroke: '#3D8299'} , 
-        	region: 'BR',
+        	region: '{{ $geounit->iso_code }}',
             colorAxis : {colors: '#3D8299'}
 
         };

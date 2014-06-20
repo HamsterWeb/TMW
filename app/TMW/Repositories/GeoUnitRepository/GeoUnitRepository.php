@@ -3,11 +3,27 @@ namespace TMW\Repositories\GeoUnitRepository;
 use GeoUnit;
 
 class GeoUnitRepository implements iGeoUnitRepository {
+	protected $geounit;
 
-	public function getList($limit = 0, $skip = 0) {
-
-		return GeoUnit::all()->toArray();
-
+	public function __construct(GeoUnit $gu) {
+		$this->geounit = $gu;
 	}
+
+	public function GeoArea() {
+		return $this->geounit->Geoarea();
+	}
+
+	public function GeoRegions(){
+		return $this->geounit->GeoRegions();
+	}
+
+	public function getRegionsInUnit($id = 0) {
+		return $this->geounit->getRegionsInUnit($id);
+	}
+
+	public function getUnitBySpot($id = 0) {
+		return $this->geounit->getIsoCodeBySpot($id);
+	}
+
 
 }

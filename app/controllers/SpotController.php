@@ -1,34 +1,132 @@
 <?php
 
 use TMW\Repositories\SpotRepository\iSpotRepository as Spot;
+use TMW\Repositories\GeoAreaRepository\iGeoAreaRepository as GeoArea;
+use TMW\Repositories\GeoUnitRepository\iGeoUnitRepository as GeoUnit;
+use TMW\Repositories\GeoRegionRepository\iGeoRegionRepository as GeoRegion;
+
 
 class SpotController extends BaseController
 {
 	protected $spots;
+	protected $geoarea;
+	protected $geounit;
+	protected $georegion;
 
-	public function __construct(Spot $spots) {
+	public function __construct(Spot $spots, GeoArea $geoarea, GeoUnit $geounit, Georegion $georegion) {
 		$this->spots = $spots;
+		$this->geoarea = $geoarea;
+		$this->geounit = $geounit;
+		$this->georegion = $georegion;
 	}
 
 	public function showIndex()
 	{
-		$spots = $this->spots->getList();
-		return View::make('spot/index', compact('spots'));
+		$spots = json_encode($this->spots->getNameEvalList());
+		return View::make('spot/index')->with('spots', $spots);
 	}
 
-	public function showSpot(Spot $spot)
+	public function showSpot($id)
 	{
-		return View::make('spot/single');
+		$spot = $this->spots->showSpot($id);
+		$georegion = $this->georegion->getRegion($spot->georegion_id);
+		$geounit = $georegion->GeoUnit()->first();
+		return View::make('spot/single')->with('spot', $spot)->with('georegion', $georegion)->with('geounit', $geounit);
 	}
 
 	public function newSpot(){
-		$geoarea = Geoarea::all();
-		//var_dump($areas);
+		$geoarea = $this->geoarea->getIdNameList();
 		return View::make('spot/new', compact('geoarea'));
-		//return View::make('spot/new');
+	}
+
+	/* check if spot already exists */
+	public function checkNameIfExists(){
+		if(Request::ajax()) {
+			$name = Input::get('name');
+			$region = Input::get('region');
+			$spot = $this->spots->checkNameIfExists($name, $region);
+			return Response::json($spot);
+		}
 	}
 
 	public function addSpot(){
-		
+		$inputs = array(
+			'georegion' => Input::get('georegion'),
+			'name' => Input::get('spotname'),
+			'windsurf' => Input::get('windsurf'),
+			'kitesurf' => Input::get('kitesurf'),
+			'waves' => Input::get('waves'),
+			'description' => Input::get('description'),
+			'tide' => Input::get('tide'),
+			'difficulty' => Input::get('difficulty'),
+			'water_type' => Input::get('water_type'),
+			'environment' => Input::get('environment'),
+			'accessibility' => Input::get('accessibility'),
+			'wg' => Input::get('wg'),
+			'advantage' => Input::get('advantages'),
+			'disadvantage' => Input::get('disadvantages')
+			);
+
+		$rules = array(
+			'georegion' => 'required',
+			'spotname' => 'alphaCustom',
+			'description' => 'alphaNumCustom',
+			'environment' => 'alphaNumCustom',
+			'advantage' => 'alphaNumCustom',
+			'disadvantage' => 'alphaNumCustom'
+			);
+
+		$validator = Validator::make($inputs, $rules);	
+
+		if ( $validator->fails() ) {
+			if(Request::ajax()) {
+					return Response::json(array('success' => false, 'id' => $validator->getMessageBag()->toArray()));
+			} else{
+					return Redirect::back()->withInput();
+			}
+
+		} else {
+			$result = $this->spots->insertSpot($inputs);
+			if($result) {
+				if(Request::ajax()) {
+						return Response::json(array('success' => true, 'id' => $result ));
+				} else{
+						return Redirect::back()->withInput();
+				}
+			}
+			else {
+				if(Request::ajax()) {
+					return Response::json(array('success' => false, 'id' => $result));
+				} else{
+						return Redirect::back()->withInput();
+				}
+			}
+		}
+	}
+
+	public function addLatLng() {
+		$id = Input::get('id');
+		$lat = Input::get('lat');
+		$lng = Input::get('lng');
+
+		if($this->spots->setLatLng($id, $lat, $lng)) {
+			if(Request::ajax()) {
+						return Response::json(array('success' => true ));
+				} else{
+						return Redirect::back()->withInput();
+				}
+		}
+	}
+
+	public function editSpot($id){
+		$valuesArr = Input::get('fields');
+		$this->spots->editSpot($id, $valuesArr);
 	}
 }
+
+
+
+
+
+
+

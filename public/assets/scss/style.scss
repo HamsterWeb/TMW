@@ -54,6 +54,10 @@ body {
 		color:$black;
 	}
 
+	.nobottommargin {
+		margin-bottom:0 !important;
+	}
+
 
 	#header-wrap {
 		padding:0;
@@ -118,7 +122,54 @@ body {
 		background-color: $grey_light;
 		border-radius:3px;
 		border:1px solid $grey-medium;
-		padding:0.5em 1.2em;
+		padding:1.5em 1.2em;
+		margin:1em 0;
+
+			.select2-container {
+				min-width:100%;
+			}
+
+			.error-message {
+				color: $red;
+				left: 1em;
+				margin-top: -0.2em;
+				max-width: 80%;
+				position: absolute;
+				display: none;
+			}
+
+			.error {
+				border:1px solid $red !important;
+			}
+
+			input[type=range] {
+				width:85%;
+				padding-top:1em;
+				display:inline-block;
+			}
+
+			output { 
+			  position: absolute;
+			  width: 40px; 
+			  height: 30px; 
+			  text-align: center; 
+			  color: $blue_dark;  
+			  display: inline-block; 
+			  left: 0;
+			  margin-left: 0;
+			  font-size:12px;
+			  top:12px;
+			}
+
+			label.check-label {
+				color:$blue_dark;
+				font-weight: normal;
+			}
+
+			select.form-control {
+				height:30px;
+			}
+
 	}
 
 	.tabs-wrap,
@@ -158,5 +209,31 @@ body {
 		thead {
 			color:$red;
 		}
+	}
+
+	.edit-btn {
+		position:absolute;
+		top:0;
+		right:1.5em;
+	}
+
+	.edited,
+	.editable {
+		border:1px dashed $grey_medium;
+		border-radius: 3px;
+		padding: 0.1em 0.3em;
+		display:block;
+		position:relative;
+
+		textarea {
+			position:absolute;
+			border:1px solid $grey-medium;
+			border-radius:2px;
+			top:0;
+			left:0;
+		}
+	}
+	.edited {
+		border:none;
 	}
 }
