@@ -10,6 +10,10 @@ class Georegion extends Eloquent {
 	public function getRegion($id){
 		return $this->find($id);
 	}
+
+	public function Spots() {
+		return $this->hasMany('Spots', 'georegion_id');
+	}
 	
 }
 

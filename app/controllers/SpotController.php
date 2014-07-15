@@ -4,6 +4,7 @@ use TMW\Repositories\SpotRepository\iSpotRepository as Spot;
 use TMW\Repositories\GeoAreaRepository\iGeoAreaRepository as GeoArea;
 use TMW\Repositories\GeoUnitRepository\iGeoUnitRepository as GeoUnit;
 use TMW\Repositories\GeoRegionRepository\iGeoRegionRepository as GeoRegion;
+use TMW\Repositories\ReviewRepository\iReviewRepository as Review;
 
 
 class SpotController extends BaseController
@@ -12,26 +13,44 @@ class SpotController extends BaseController
 	protected $geoarea;
 	protected $geounit;
 	protected $georegion;
+	protected $review;
 
-	public function __construct(Spot $spots, GeoArea $geoarea, GeoUnit $geounit, Georegion $georegion) {
+	public function __construct(Spot $spots, GeoArea $geoarea, GeoUnit $geounit, Georegion $georegion, Review $review) {
 		$this->spots = $spots;
 		$this->geoarea = $geoarea;
 		$this->geounit = $geounit;
 		$this->georegion = $georegion;
+		$this->review = $review;
 	}
 
 	public function showIndex()
 	{
-		$spots = json_encode($this->spots->getNameEvalList());
-		return View::make('spot/index')->with('spots', $spots);
+		//$spots = json_encode($this->spots->getNameEvalList());
+		return View::make('spot/index');//->with('spots', $spots);
+	}
+
+	public function getSpotPeriod(){
+		$period = Input::get('period');
+		$spots = json_encode($this->spots->getNameEvalList($period));
+		if(Request::ajax()) {
+			return Response::json(array('success' => true, 'spots' => $spots));
+		} 
+		else {
+			return $this->showIndex();
+		}
 	}
 
 	public function showSpot($id)
 	{
 		$spot = $this->spots->showSpot($id);
-		$georegion = $this->georegion->getRegion($spot->georegion_id);
-		$geounit = $georegion->GeoUnit()->first();
-		return View::make('spot/single')->with('spot', $spot)->with('georegion', $georegion)->with('geounit', $geounit);
+		//$comments = $this->spots->comments()->toArray();
+		/*$count = $spot->comments->count();
+		$comments = $spot->comments->toArray();
+		$paged = Paginator::make($comments, $count, 5);*/
+		//$georegion = $this->georegion->getRegion($spot->georegion_id);
+		//$geounit = $georegion->GeoUnit()->first();
+		//return View::make('spot/single')->with('spot', $spot);//->with('comments', $comments);//->with('georegion', $georegion)->with('geounit', $geounit);
+		return View::make('spot/single', compact('spot'));
 	}
 
 	public function newSpot(){
@@ -120,8 +139,26 @@ class SpotController extends BaseController
 
 	public function editSpot($id){
 		$valuesArr = Input::get('fields');
-		$this->spots->editSpot($id, $valuesArr);
+		if($this->spots->editSpot($id, $valuesArr)) {
+			if(Request::ajax()) {
+						return Response::json(array('success' => true ));
+				} else{
+						return Redirect::back()->withInput();
+				}
+		}
 	}
+
+	public function editSpotForPeriod($id){
+		$valuesArr = Input::get('fields');
+		if($this->spots->editSpotForPeriod($id, $valuesArr)) {
+			if(Request::ajax()) {
+						return Response::json(array('success' => true ));
+				} else{
+						return Redirect::back()->withInput();
+				}
+		}
+	}
+
 }
 
 

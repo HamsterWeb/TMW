@@ -128,7 +128,7 @@
                     {{ Form::label('water_type', 'Water type') }}
                   </div>
                   <div class="col-sm-8">
-                      {{ Form::select('water_type', array(1 => 'ocean', 2 => 'sea'), null, array('class' =>'form-control', 'id' => 'water_type')) }}
+                      {{ Form::select('water_type', App::make('water'), null, array('class' =>'form-control', 'id' => 'water_type')) }}
                   </div>
                 </div>
 
@@ -323,13 +323,13 @@
   console.log(latlng);*/
 
   /*   regex control on textareas    */
-  $(document).on('keyup focusout blur', '#description, #environment, #advantages, #disadvantages',
+  /*$(document).on('keyup focusout blur', '#description, #environment, #advantages, #disadvantages',
          function(e) {
-            if (e.keyCode !== 9 && e.keyCode !== 16) /* Différent de Tab et Shift*/ {
+            if (e.keyCode !== 9 && e.keyCode !== 16) *//* Différent de Tab et Shift*/ /*{
                  controle_regex_or_null(this, text_num_reg); 
                  //console.log("ok");
             }
-        });
+        });*/
 
   /*   submitting     */
   $("#addSpot").on('click', function(e){
@@ -338,6 +338,7 @@
       var form = $("#addSpotForm");
       var inputs = form.find("input");
       var alert = $("#alertOnSubmitFail");
+      var spotname = $("#spotname").val();
       //console.log(form.serialize());
       inputs.each(function () {
           $(this).blur();
@@ -360,7 +361,7 @@
                                   alert.show();
                               } else {
                                    if(data.id) { //insérer lat et long
-                                      getLatLong('prea', function(latlng) { 
+                                      getLatLong(spotname, function(latlng) { 
                                         $.ajax({
                                             type:"post",
                                             url:"/spot/addlatlng",

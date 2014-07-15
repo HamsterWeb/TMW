@@ -19,6 +19,10 @@ class Geounit extends Eloquent {
 		
 	}
 
+	public function Spots(){
+		return $this->hasManyThrough('Spot', 'Georegion', 'geounit_id', 'georegion_id');
+	}
+
 }
 
 ?>

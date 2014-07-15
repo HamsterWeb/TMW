@@ -35,7 +35,9 @@ Route::model('rider', 'Rider');
 /* spots */
 Route::get('/', array('as' => 'index', 'uses' => 'SpotController@showIndex'));
 
-Route::get('spot/new', array( 'as' => 'newSpot', 'uses' => 'SpotController@newSpot'));
+Route::post('spot/all', 'SpotController@getSpotPeriod');
+
+Route::get('spot/new', array( 'before' => 'auth', 'as' => 'newSpot', 'uses' => 'SpotController@newSpot'));
 
 Route::post('spot/add', array('before' => 'csrf', 'as' => 'addSpot', 'uses' => 'SpotController@addSpot' ));
 
@@ -49,8 +51,22 @@ Route::post('spot/addlatlng', array('before' => 'csrf', 'uses' => 'SpotControlle
 
 Route::post('spot/{id}/edit', array('before' => 'csrf', 'uses' => 'SpotController@editSpot'));
 
+Route::post('spotinperiod/{id}/edit/period', array('uses' => 'SpotController@editSpotForPeriod'));
+
+/* review */
+
+Route::post('review/add', array('before'=> 'csrf', 'uses' => 'ReviewController@addReview'));
+
+Route::post('review/delete', array('before' => 'auth', 'uses' => 'ReviewController@deleteReview'));
 
 /* users */
+Route::get('rider/login', 'RiderController@showLogin' );
 
+Route::post('rider/login', array('uses' => 'RiderController@login'));
 
+Route::get('rider/logout', 'RiderController@logout');
+
+Route::get('rider/access/{id}', 'RiderController@forceLogin');
+
+Route::get('rider/log-in-with-facebook', 'RiderController@loginFacebook');
 

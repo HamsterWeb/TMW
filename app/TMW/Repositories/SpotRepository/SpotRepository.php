@@ -15,14 +15,8 @@ class SpotRepository implements iSpotRepository {
 
 	}
 
-	public function getNameEvalList() {
-		$spotsArr = array(array("Spot", "Quality"));
-		$spots = Spot::get(array('name', 'evaluation'))->toArray();
-		foreach($spots as $key=>$value) {
-				$spotsArr[] = array($value['name'], (int)$value['evaluation']);
-			}
-		return $spotsArr;
-		//return Spot::lists('evaluation', 'name');
+	public function getNameEvalList($period = 0) {
+		return $this->spot->getNameEvalList($period);
 	}
 
 	public function checkNameIfExists($name ='', $region = 0){
@@ -48,4 +42,13 @@ class SpotRepository implements iSpotRepository {
 	public function editSpot($id = 0, $arrValues = array()) {
 		return $this->spot->editSpot($id, $arrValues);
 	}
+
+	public function editSpotForPeriod($id = 0, $values = array()){
+		return $this->spot->editSpotForPeriod($id, $values);
+	}
+
+	public function reviews(){
+		return $this->spot->reviews();
+	}
+
 }

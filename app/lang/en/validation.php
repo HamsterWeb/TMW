@@ -83,8 +83,11 @@ return array(
 	*/
 
 	'custom' => array(
-		'attribute-name' => array(
-			'rule-name' => 'custom-message',
+		'comment' => array(
+			'alpha_num_custom' => 'The :attribute contains disallowed characters',
+		),
+		'title' => array(
+			'alpha_num_custom' => 'The :attribute contains disallowed characters',
 		),
 	),
 

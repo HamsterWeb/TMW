@@ -4,7 +4,8 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.1.*"
+		"laravel/framework": "4.1.*",
+		"artdarek/oauth-4-laravel": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -39,6 +40,8 @@
 	},
 	"minimum-stability": "stable",
 	"require-dev": {
-		"panique/laravel-sass":"dev-master"
+		"panique/laravel-sass":"dev-master",
+		"phpunit/phpunit": "3.7.*",
+		"mockery/mockery":"dev-master"
 	}
 }

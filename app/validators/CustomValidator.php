@@ -24,7 +24,7 @@ class CustomValidator extends Illuminate\Validation\Validator
 
     public function validateAlphaNumCustom($attribute, $value, $parameters = null) 
     {
-        $regex = "/^[a-zA-Z0-9éèàçùú&.\,-\/:\'_ ]+$/";
+        $regex = "/^[a-zA-Z0-9éèàçùú&.\,-\/:\'_ !?();]+$/";
         if (preg_match($regex, $value)) {
             return true;
         }

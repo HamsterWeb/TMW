@@ -13,7 +13,15 @@
 
 App::before(function($request)
 {
-	//
+	/*if (Session::has('rider')) {
+	       Auth::login(Session::get('rider'));
+	   }
+    else{
+	       if(Cookie::has('rider')){
+	           Session::put('rider',Cookie::get('rider'));
+	           Auth::login(Cookie::get('rider'));
+	       }
+	   }*/
 });
 
 
@@ -35,7 +43,7 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+	if (Auth::guest()) return Redirect::guest('rider/login');
 });
 
 

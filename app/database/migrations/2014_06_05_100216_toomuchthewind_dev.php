@@ -58,7 +58,7 @@ class ToomuchthewindDev extends Migration {
 			$table->boolean('kitesurf');
 			$table->integer('evaluation');
 			$table->boolean('tide');
-			$table->integer('waves');
+			$table->float('waves');
 			$table->text('environment');
 			$table->text('description');
 			$table->integer('difficulty');
@@ -108,6 +108,7 @@ class ToomuchthewindDev extends Migration {
 			$table->string('lastname', 128);
 			$table->string('nickname', 128);
 			$table->date('birthdate');
+			$table->int('geounit_id');
 			$table->boolean('kitesurfer');
 			$table->boolean('windsurfer');
 			$table->integer('k_level');
@@ -117,6 +118,7 @@ class ToomuchthewindDev extends Migration {
 			$table->string('password', 256);
 			$table->date('k_start');
 			$table->date('w_start');
+			$table->string("remember_token", 256)->nullable();
 			$table->string('app_role', 50);
 			$table->string('avatar', 256);
 			$table->timestamps();
@@ -124,21 +126,25 @@ class ToomuchthewindDev extends Migration {
 
 
 		//rider_for_spot
-		Schema::create('rider_for_spot', function($table){
+		Schema::create('review', function($table){
 				$table->engine = 'InnoDB';
 				$table->increments('id');
 				$table->integer('spot_id')->unsigned();
 				$table->foreign('spot_id')->references('id')->on('spot')->onDelete('cascade')->onUpdate('cascade');
 				$table->integer('rider_id')->unsigned();
 				$table->foreign('rider_id')->references('id')->on('rider')->onDelete('cascade')->onUpdate('cascade');
+				$table->text('title');
 				$table->text('comment');
+				$table->datetime('date_comment');
+				$table->float('avg_rate');
+				$table->timestamps();
 			});
 
 		//rider_for_spot_in_period
-		Schema::create('rider_for_spot_in_period', function($table){
+		Schema::create('review_for_period', function($table){
 				$table->engine = 'InnoDB';
-				$table->integer('rider_for_spot_id')->unsigned();
-				$table->foreign('rider_for_spot_id')->references('id')->on('rider_for_spot')->onDelete('cascade')->onUpdate('cascade');
+				$table->integer('review_id')->unsigned();
+				$table->foreign('review_id')->references('id')->on('review')->onDelete('cascade')->onUpdate('cascade');
 				$table->integer('period_id')->unsigned();
 				$table->foreign('period_id')->references('id')->on('period')->onDelete('cascade')->onUpdate('cascade');
 				$table->integer('evaluation');
@@ -146,11 +152,16 @@ class ToomuchthewindDev extends Migration {
 
 		//spot_photo
 		Schema::create('spot_photo', function($table){
+				$table->engine = 'InnoDB';
 				$table->increments('id');
 				$table->string('source', 256);
 				$table->text('description');
-				$table->integer('rider_for_spot_id')->unsigned();
-				$table->foreign('rider_for_spot_id')->references('id')->on('rider_for_spot')->onDelete('cascade')->onUpdate('cascade');
+				$table->integer('rider_id')->unsigned();
+				$table->foreign('rider_id')->references('id')->on('rider')->onDelete('cascade')->onUpdate('cascade');
+				$table->integer('spot_id')->unsigned();
+				$table->foreign('spot_id')->references('id')->on('spot')->onDelete('cascade')->onUpdate('cascade');
+				$table->timestamps();
+				
 		});
 	}
 

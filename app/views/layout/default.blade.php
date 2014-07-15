@@ -18,25 +18,63 @@
 	</head>
 	<body>
 	<div class="container-fluid" id="header-wrap">
+		<section id="auth-header">
+		 @if(Auth::check())
+			<div class="row">
+				<div class="col-md-offset-10">
+					<i class="glyphicon glyphicon-user"> </i>
+					Hello {{ Auth::user()->nickname }} | <a href="{{ url('rider/logout') }}">Log out </a>
+				</div>
+			</div>
+		@else
+			<div class="row">
+				<div class="col-md-offset-11">
+					<a href="{{ url('rider/login') }}" class="btn btn-xs btn-default"> Connect </a>
+				</div>
+			</div>
+		@endif
+		</section>
 		<nav class="navbar navbar-default" >
 			<div class="logo-wrap">
 				<figure>
-					<h1> TMW </h1>	
+					<a href="{{ url('/') }}">
+						<img src="{{ asset('assets/images/flag-flat-dark-blue.png') }}" alt="TMW" />
+					</a>
 				</figure>
+					<div>
+					<h1> 
+						Too much the wind my friend !
+					</h1>
+					<h2>
+						<i class="glyphicon glyphicon-map-marker"> </i> <strong> Windsurf </strong>| <strong>Kitesurf </strong>spot finder
+					</h2>
+				</div>
 			</div>
 			<ul>
+				@if(Auth::check())
 				<li>
-					<a href="{{ url('/') }}"> Home </a>
+					<a href="{{ url('spot/new') }}"> <i class="glyphicon glyphicon-plus-sign"> </i> Add a new spot </a>
 				</li>
 				<li>
-					<a href="{{ url('spot/new') }}"> Add a new spot </a>
+					<div class="horizontal-form">
+						{{ Form::open(array('url' => 'spot/search', 'method' => 'post', 'id' => 'searchForm') ) }}
+							 <input type="search" id="spotname" name="spotname" placeholder="Search.." />
+							 <button type="submit" id="submitSpotSearch" name="submitSpotSearch" class="btn btn-default btn-sm">
+								<i class="glyphicon glyphicon-search"></i>
+							 </button>
+						{{ Form::close() }}
+					</div>
 				</li>
+				@endif
 			</ul>
 		</nav>
-	</div>
 	
-	@yield('content')
+	
+		@yield('content')
 
+		<div id="footer">
+		</div>
+	</div>
 	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="{{ asset('assets/js/main.js') }}"> </script>
